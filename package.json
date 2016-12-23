@@ -11,6 +11,9 @@
     "url": "git+https://github.com/drdpedroso/o-glass.git"
   },
   "author": "Eduardo Pedroso",
+  "bin": {
+    "og": "./index.js"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/drdpedroso/o-glass/issues"
