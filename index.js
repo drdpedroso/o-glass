@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-console.log('Hello, world!');
+let shell = require("shelljs");
+
+shell.exec("git add -A . && git commit -a -m 'test'");
