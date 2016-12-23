@@ -1,0 +1,19 @@
+{
+  "name": "@drdpedroso/o-glass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drdpedroso/o-glass.git"
+  },
+  "author": "Eduardo Pedroso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drdpedroso/o-glass/issues"
+  },
+  "homepage": "https://github.com/drdpedroso/o-glass#readme"
+}
