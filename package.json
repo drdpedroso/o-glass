@@ -12,7 +12,8 @@
   },
   "author": "Eduardo Pedroso",
   "bin": {
-    "og": "./index.js"
+    "og": "./index.js",
+    "og angular": "./bin/angular.js"
   },
   "license": "ISC",
   "bugs": {
