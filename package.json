@@ -12,8 +12,7 @@
   },
   "author": "Eduardo Pedroso",
   "bin": {
-    "og": "./index.js",
-    "og angular": "./bin/angular.js"
+    "og": "./index.js"
   },
   "license": "ISC",
   "bugs": {
@@ -21,6 +20,7 @@
   },
   "homepage": "https://github.com/drdpedroso/o-glass#readme",
   "dependencies": {
+    "commander": "^2.9.0",
     "shelljs": "^0.7.5"
   }
 }

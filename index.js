@@ -1,4 +1,9 @@
 #!/usr/bin/env node
-let shell = require("shelljs");
+ var program = require('commander');
 
-shell.exec("git add -A . && git commit -a -m 'test'");
+ program
+  .option('-t, --type <type>', 'The application type is')
+
+  .parse(process.argv);
+
+  if(program.type){console.log(program.type)}
