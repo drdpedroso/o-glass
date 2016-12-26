@@ -1,22 +1,20 @@
 #!/usr/bin/env node
  let program = require('commander');
  let shell = require("shelljs");
+ let fs = require('fs');
  let createFile = require('create-file');
- let cmdValue = '';
  let whatValue = '';
  let nameValue = '';
+ let nameValueCap = '';
 
  program
   .option('-t, --type <type>', 'The application type is')
   .option('-n, --name <name>', 'The application name is')
-  .arguments('<cmd> [what] [name]')
-  .action(function (cmd, what, name) {
-     cmdValue = cmd;
+  .command('create [what] [name]')
+  .action(function (what, name) {
      whatValue = what;
      nameValue = name;
-     console.log(cmd);
-     console.log(what);
-     console.log(name);
+     nameValueCap = name.replace(/\b\w/g, l => l.toUpperCase());
   });
 
  program
@@ -28,13 +26,31 @@
   	shell.exec("cd " + program.name + " && npm install");
   }
 
-  if(cmdValue && whatValue){
-    if(cmdValue == "create"){
-      if(whatValue == "module"){
-        createFile('./js/modules/' + nameValue + '/' + nameValue + '-controller.js', 'my content\n', function (err) {
-          console.log(err);
-          // file either already exists or is now created (including non existing directories)
-        });
-      }
+  function readModuleFile(path, callback) {
+    try {
+        let filename = require.resolve(path);
+        fs.readFile(filename, 'utf8', callback);
+    } catch (e) {
+        callback(e);
     }
+  }
+
+  if(whatValue == "module"){
+    //Create Controller
+    createFile('./www/modules/' + nameValue + '/controllers/' + nameValue + '-controller.js'
+             , 'app.controller(\"'+ nameValueCap + 'Controller\", function(){\n});', function (err) {
+    });
+
+    //Create Service
+    createFile('./www/modules/' + nameValue + '/services/' + nameValue + '-service.js'
+             , 'app.service(\"'+ nameValueCap + 'Service\", function(){\n});', function (err) {
+    });
+
+    //Create View
+    readModuleFile('./html-content.html', function (err, words) {
+      createFile('./www/modules/' + nameValue + '/views/' + nameValue + '.html'
+               , words, function (err) {
+      });
+    });
+
   }
