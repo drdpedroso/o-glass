@@ -38,12 +38,12 @@
   if(whatValue == "module"){
     //Create Controller
     createFile('./www/modules/' + nameValue + '/controllers/' + nameValue + '-controller.js'
-             , 'app.controller(\"'+ nameValueCap + 'Controller\", function(){\n});', function (err) {
+             , "app.controller(\'"+ nameValueCap + "Controller\', function(){\n});", function (err) {
     });
 
     //Create Service
     createFile('./www/modules/' + nameValue + '/services/' + nameValue + '-service.js'
-             , 'app.service(\"'+ nameValueCap + 'Service\", function(){\n});', function (err) {
+             , "app.service(\'"+ nameValueCap + "Service\', function(){\n});", function (err) {
     });
 
     //Create View
