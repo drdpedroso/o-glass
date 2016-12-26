@@ -21,6 +21,7 @@
   "homepage": "https://github.com/drdpedroso/o-glass#readme",
   "dependencies": {
     "commander": "^2.9.0",
+    "create-file": "^1.0.1",
     "shelljs": "^0.7.5"
   }
 }
