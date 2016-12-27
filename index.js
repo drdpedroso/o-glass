@@ -11,7 +11,7 @@
   .option('-t, --type <type>', 'The application type is')
   .option('-n, --name <name>', 'The application name is')
   .command('create [what] [name]')
-  .action(function (what, name) {
+  .action((what, name) => {
      whatValue = what;
      nameValue = name;
      nameValueCap = name.replace(/\b\w/g, l => l.toUpperCase());
@@ -26,7 +26,9 @@
   	shell.exec("cd " + program.name + " && npm install");
   }
 
-  function readModuleFile(path, callback) {
+  changeName = (content, newWord) => { return content.replace('placeholder', newWord) }
+
+  readModuleFile = (path, callback) => {
     try {
         let filename = require.resolve(path);
         fs.readFile(filename, 'utf8', callback);
@@ -37,19 +39,27 @@
 
   if(whatValue == "module"){
     //Create Controller
-    createFile('./www/modules/' + nameValue + '/controllers/' + nameValue + '-controller.js'
-             , "app.controller(\'"+ nameValueCap + "Controller\', function(){\n});", function (err) {
+    readModuleFile('./templates/controller.js', (err, content) => {
+      let newName = changeName(content, nameValueCap + 'Controller');
+      console.log(newName);
+      createFile('./www/modules/' + nameValue + '/controllers/' + nameValue + '-controller.js'
+               , newName, (err) => {
+      });
     });
+
 
     //Create Service
-    createFile('./www/modules/' + nameValue + '/services/' + nameValue + '-service.js'
-             , "app.service(\'"+ nameValueCap + "Service\', function(){\n});", function (err) {
+    readModuleFile('./templates/service.js', (err, content) => {
+      createFile('./www/modules/' + nameValue + '/services/' + nameValue + '-service.js'
+               , "app.service(\'"+ nameValueCap + "Service\', function(){\n});", (err) => {
+      });
     });
 
+
     //Create View
-    readModuleFile('./html-content.html', function (err, words) {
+    readModuleFile('./templates/html-content.html', (err, content) => {
       createFile('./www/modules/' + nameValue + '/views/' + nameValue + '.html'
-               , words, function (err) {
+               , content, (err) => {
       });
     });
 

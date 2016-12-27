@@ -1,0 +1,2 @@
+app.service('placeholder', function(){
+});
