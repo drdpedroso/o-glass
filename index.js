@@ -41,7 +41,6 @@
     //Create Controller
     readModuleFile('./templates/controller.js', (err, content) => {
       let newName = changeName(content, nameValueCap + 'Controller');
-      console.log(newName);
       createFile('./www/modules/' + nameValue + '/controllers/' + nameValue + '-controller.js'
                , newName, (err) => {
       });
@@ -50,8 +49,9 @@
 
     //Create Service
     readModuleFile('./templates/service.js', (err, content) => {
+      let newName = changeName(content, nameValueCap + 'Service');
       createFile('./www/modules/' + nameValue + '/services/' + nameValue + '-service.js'
-               , "app.service(\'"+ nameValueCap + "Service\', function(){\n});", (err) => {
+               , newName, (err) => {
       });
     });
 
